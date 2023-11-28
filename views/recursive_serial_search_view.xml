@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_recursive_serial_search_search" model="ir.ui.view">
-        <field name="name">view_recursive_serial_search_search</field>
-        <field name="model">recursive.serial.search</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="component_id" string="Component" required="1" readonly="1" widget="many2many_tags" options="{'no_create': True}" on_change="_compute_lot_ids"/>
-            </search>
-        </field>
-    </record>
-
     <record id="view_recursive_serial_search_form" model="ir.ui.view">
         <field name="name">view_recursive_serial_search_form</field>
         <field name="model">recursive.serial.search</field>
         <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="component_id" required="1" options="{'no_create': True}"/>
-                        <field name="lot_ids" string="Products" readonly="1" options="{'no_create': True}">
-                            <tree>
-                                <field name="product_id" />
-                                <field name="name" />
-                                <field name="product_qty" string="Quantity Used in Assembly" />
-                            </tree>
-                        </field>
-                        <label for="lot_ids" string="Only products with serial numbers will be displayed"/>
-                    </group>
-                </sheet>
+            <form create="false">
+                <header>
+                    <div style="margin: 1rem 0; color: #ca855c; font-size: 110%;">
+                        ⚠ Only products with serial numbers will be displayed
+                    </div>
+                </header>
+                <group>
+                    <field name="component_id" required="1" options="{'no_create': True}" style="font-size: 130%; background-color: #eaeaea; border: 1px solid #999999; padding:1rem; border-radius: .5rem"/>
+                    <field name="lot_ids" string="Products" readonly="1" options="{'no_create': True}">
+                        <tree export="true">
+                            <field name="product_id" />
+                            <field name="name" />
+                            <field name="product_qty" string="Quantity Used in Assembly" />
+                        </tree>
+                    </field>
+                </group>
             </form>
         </field>
     </record>
@@ -36,8 +28,7 @@
         <field name="name">Recursive Serial Search</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">recursive.serial.search</field>
-        <field name="view_mode">form,list</field>
-        <field name="search_view_id" ref="view_recursive_serial_search_search"/>
+        <field name="view_mode">form</field>
         <field name="domain">[]</field>
     </record>
 
