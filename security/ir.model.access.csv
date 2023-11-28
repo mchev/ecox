@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ecox.access_recursive_serial_search,access_recursive_serial_search,ecox.model_recursive_serial_search,base.group_user,1,1,1,1
+ecox.access_ecox_test_wizard,access_ecox_test_wizard,ecox.model_ecox_test_wizard,base.group_user,1,1,1,1
+ecox.access_ecox_test_line,access_ecox_test_line,ecox.model_ecox_test_line,base.group_user,1,1,1,1

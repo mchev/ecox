@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ecox_test_form_popup" model="ir.ui.view">
+        <field name="name">ecox.test.wizard.form</field>
+        <field name="model">ecox.test.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Component Search">
+                <label for="component_id" string="Component"/>
+                <field name="component_id" required="1" options="{'no_create': True}"/>
+                <field name="lot_lines" widget="one2many_list" nolabel="1" readonly="1" options="{'no_create': True}">
+                    <tree string="Components" editable="false">
+                        <field name="product_id"/>
+                        <field name="lot_id"/>
+                        <field name="product_qty" string="Component quantity in product"/>
+                    </tree>
+                </field>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ecox_test_popup" model="ir.actions.act_window">
+        <field name="name">Recursive Serial Search</field>
+        <field name="res_model">ecox.test.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_test_search" name="Products By Component" action="action_ecox_test_popup" parent="ecox.ecox_traceability_menu"/>
+</odoo>

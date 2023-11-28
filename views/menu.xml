@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem 
+        id="ecox_traceability_menu" 
+        name="Traceability" 
+        parent="stock.menu_stock_root"/>
+
+    <menuitem 
+        action="stock.action_production_lot_form" 
+        id="ecox_menu_action_production_lot_form"
+        parent="ecox_traceability_menu" 
+        groups="stock.group_production_lot"
+        sequence="101"/>
+</odoo>
