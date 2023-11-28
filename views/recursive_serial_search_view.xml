@@ -22,7 +22,7 @@
                             <tree>
                                 <field name="product_id" />
                                 <field name="name" />
-                                <field name="product_qty" />
+                                <field name="product_qty" string="Quantity Used in Assembly" />
                             </tree>
                         </field>
                         <label for="lot_ids" string="Only products with serial numbers will be displayed"/>

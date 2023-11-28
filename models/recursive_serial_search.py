@@ -10,19 +10,31 @@ class RecursiveSerialSearch(models.Model):
     @api.depends('component_id')
     def _compute_lot_ids(self):
         for record in self:
-            products = self._get_products_from_component(self.component_id)
-            lot_ids = self.env['stock.lot'].search([('product_id', 'in', list(products))])
+            products_with_qty = self._get_products_from_component(record.component_id)
+            lot_ids = self.env['stock.lot'].search([('product_id', 'in', list(products_with_qty.keys()))])
+
+            for lot_id in lot_ids:
+                lot_id.product_qty = products_with_qty.get(lot_id.product_id.id, 0)
+
             record.lot_ids = lot_ids
 
-    def _get_products_from_component(self, component, products=None):
-        if products is None:
-            products = set()
+    def _get_products_from_component(self, component, quantity=1, products_with_qty=None):
+        if products_with_qty is None:
+            products_with_qty = {}
 
-        bom_lines = self.env['mrp.bom.line'].search([('product_id', '=', component.id)])
+        product_id = component.id
+
+        if product_id in products_with_qty:
+            # If the product already exists, add the quantities
+            products_with_qty[product_id] += quantity
+        else:
+            # If the product doesn't exist, set the quantity
+            products_with_qty[product_id] = quantity
+
+        bom_lines = self.env['mrp.bom.line'].search([('product_id', '=', product_id)])
         for bom_line in bom_lines:
-            variant_id = bom_line.bom_id.product_tmpl_id.product_variant_id.id
-            if variant_id not in products:
-                products.add(variant_id)
-                self._get_products_from_component(bom_line.bom_id.product_tmpl_id.product_variant_id, products)
+            # Recursively call for sub-components with updated quantity
+            sub_component = bom_line.bom_id.product_tmpl_id.product_variant_id
+            self._get_products_from_component(sub_component, bom_line.product_qty * quantity, products_with_qty)
 
-        return products
+        return products_with_qty

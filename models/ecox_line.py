@@ -4,7 +4,7 @@ class EcoxLine(models.TransientModel):
     _name = 'ecox.line'
     _description = "Line model for ecox views"
 
-    ecox_test_id = fields.Many2one('recursive.product.search.wizard', ondelete='cascade')
+    recursive_product_search_id = fields.Many2one('recursive.product.search.wizard', ondelete='cascade')
     product_id = fields.Many2one('product.product', string="Product")
     lot_id = fields.Many2one('stock.lot', string="Serial number")
     product_qty = fields.Float(string="Product Quantity")
