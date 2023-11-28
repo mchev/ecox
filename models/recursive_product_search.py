@@ -1,15 +1,15 @@
 from odoo import models, fields, api
 
 class EcoxTestWizard(models.TransientModel):
-    _name = 'ecox.test.wizard'
+    _name = 'recursive.product.search.wizard'
     _description = "Wizard for searching components"
 
     component_id = fields.Many2one('product.product', string="Component", required=True)
-    lot_lines = fields.One2many('ecox.test.line', 'ecox_test_id', string="Serial Numbers")
+    lot_lines = fields.One2many('ecox.line', 'ecox_test_id', string="Serial Numbers")
     
     @api.onchange('component_id')
     def _onchange_component_id(self):
-        line_obj = self.env['ecox.test.line']
+        line_obj = self.env['ecox.line']
         
         products = self._get_products_from_component(self.component_id)
 
@@ -39,7 +39,7 @@ class EcoxTestWizard(models.TransientModel):
         for bom_line in bom_lines:
             variant_id = bom_line.bom_id.product_tmpl_id.product_variant_id.id
             bom_line_id = bom_line.id
-            if variant_id not in [product[0] for product in products]:
+            if variant_id not in products:
                 products.add((variant_id, bom_line_id))
                 self._get_products_from_component(bom_line.bom_id.product_tmpl_id.product_variant_id, products)
 

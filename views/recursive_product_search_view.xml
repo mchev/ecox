@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="view_ecox_test_form_popup" model="ir.ui.view">
-        <field name="name">ecox.test.wizard.form</field>
-        <field name="model">ecox.test.wizard</field>
+    <record id="view_recursive_product_search_form_popup" model="ir.ui.view">
+        <field name="name">recursive.product.search.wizard.form</field>
+        <field name="model">recursive.product.search.wizard</field>
         <field name="arch" type="xml">
             <form string="Component Search">
                 <label for="component_id" string="Component"/>
@@ -19,12 +19,12 @@
         </field>
     </record>
 
-    <record id="action_ecox_test_popup" model="ir.actions.act_window">
+    <record id="action_recursive_product_search_popup" model="ir.actions.act_window">
         <field name="name">Recursive Serial Search</field>
-        <field name="res_model">ecox.test.wizard</field>
+        <field name="res_model">recursive.product.search.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_test_search" name="Products By Component" action="action_ecox_test_popup" parent="ecox.ecox_traceability_menu"/>
+    <menuitem id="menu_test_search" name="Products By Component" action="action_recursive_product_search_popup" parent="ecox.ecox_traceability_menu"/>
 </odoo>
