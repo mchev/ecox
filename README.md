@@ -34,3 +34,22 @@ Search for a component.
         $unfoldable.click();
     });
 ```
+
+## Dev
+
+Run Odoo with the custom conf and upgrade the ecox pagkage.
+
+```bash
+python3 odoo-bin -c odoo.conf -u ecox
+```
+
+./odoo.conf
+
+```
+[options]
+db_host = localhost
+db_port = 5432
+db_user = odoo
+db_password = ""
+addons_path = addons,dev
+```
