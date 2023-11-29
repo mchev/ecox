@@ -31,7 +31,6 @@ Search for a component.
 ```js
  $(".o_stock_reports_unfoldable").each(function () {
         var $unfoldable = $(this);
-        // Trigger click on the unfoldable element to unfold the row
         $unfoldable.click();
     });
 ```
