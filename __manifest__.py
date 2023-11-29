@@ -6,7 +6,7 @@
 	'summary': 'Custom Traceability Views',
     'license': 'OEEL-1',
     'category': 'Inventory/Inventory',
-    'depends': ['product', 'mrp'],
+    'depends': ['product', 'mrp', 'stock'],
     'installable': True,
     'application': True,
     'data': [
