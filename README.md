@@ -37,7 +37,7 @@ Search for a component.
 
 ## Dev
 
-Run Odoo with the custom conf and upgrade the ecox pagkage.
+Run Odoo with the custom conf and upgrade the ecox package.
 
 ```bash
 python3 odoo-bin -c odoo.conf -u ecox
